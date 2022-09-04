@@ -1,2 +1,3 @@
-# -learn-webpack
-拿下烦人的 webpack, 记录
+# learn-webpack
+
+当今各个成熟的框架都集成了打包工具，总是会莫名的无法运行，各种报错让人非常头疼，因此决定学习 webpack
