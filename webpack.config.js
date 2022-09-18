@@ -16,10 +16,32 @@ module.exports = {
   },
   // 加载器
   module: {
-    rules: [],
+    rules: [
+      // loader 配置
+      {
+        test: /\.css$/, // 只检测 .css 文件
+        use: [
+          // 执行顺序：从右到左（从上到下）
+          "style-loader", // 将 js 中的 css 通过创建 style 标签添加到 html 文件中生效
+          "css-loader",
+        ],
+      },
+      {
+        test: /\.(png|jpe?g|gif|webp|svg)$/,
+        type: "asset",
+        parser: {
+          dataUrlCondition: {
+            // 小于 10kb 的图片转 base64
+            // 优点：减少请求数量
+            // 缺点：体积会更大
+            maxSize: 10 * 1024,
+          },
+        },
+      },
+    ],
   },
   // 插件
   plugins: [],
   // 模式
   mode: "development", // 开发模式
-}
+};
