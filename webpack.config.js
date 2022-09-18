@@ -1,6 +1,8 @@
 // Node.js的核心模块，专门用来处理文件路径
 const path = require("path");
 
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
 module.exports = {
   // 入口
   // 相对路径和绝对路径都行
@@ -41,13 +43,22 @@ module.exports = {
         },
         generator: {
           // 打包输出文件名
-          filename: 'static/images/[hash:10][ext][query]'
-        }
+          filename: "static/images/[hash:10][ext][query]",
+        },
       },
     ],
   },
   // 插件
-  plugins: [],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, "public/index.html"),
+    }),
+  ],
+  devServer: {
+    host: "localhost",
+    port: "3334",
+    open: true,
+  },
   // 模式
   mode: "development", // 开发模式
 };
