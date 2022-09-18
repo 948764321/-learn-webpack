@@ -11,8 +11,10 @@ module.exports = {
     // path.resolve()方法返回一个绝对路径
     // __dirname 当前文件的文件夹绝对路径
     path: path.resolve(__dirname, "dist"),
-    // filename: 输出文件名
-    filename: "main.js",
+    // 入口文件打包输出文件名
+    filename: "static/js/main.js",
+    // 自动清空上次的 dist 目录
+    clean: true,
   },
   // 加载器
   module: {
@@ -37,6 +39,10 @@ module.exports = {
             maxSize: 10 * 1024,
           },
         },
+        generator: {
+          // 打包输出文件名
+          filename: 'static/images/[hash:10][ext][query]'
+        }
       },
     ],
   },
