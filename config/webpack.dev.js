@@ -2,6 +2,7 @@
 const path = require("path");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   // 入口
@@ -22,7 +23,7 @@ module.exports = {
         test: /\.css$/, // 只检测 .css 文件
         use: [
           // 执行顺序：从右到左（从上到下）
-          "style-loader", // 将 js 中的 css 通过创建 style 标签添加到 html 文件中生效
+          MiniCssExtractPlugin.loader,
           "css-loader",
         ],
       },
@@ -47,9 +48,6 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
-          // options: {
-          //   presets: ['@babel/preset-env']
-          // }
         },
       },
     ],
@@ -58,6 +56,9 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "../public/index.html"),
+    }),
+    new MiniCssExtractPlugin({
+      filename: "static/css/main.css",
     }),
   ],
   devServer: {
