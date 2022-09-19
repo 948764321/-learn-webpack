@@ -25,6 +25,14 @@ module.exports = {
           // 执行顺序：从右到左（从上到下）
           MiniCssExtractPlugin.loader,
           "css-loader",
+          {
+            loader: "postcss-loader",
+            option: {
+              postcssOption: {
+                plugins: ["postcss-preset-env"],
+              },
+            },
+          },
         ],
       },
       {
