@@ -12,7 +12,7 @@ module.exports = {
     // path: 文件输出目录，必须是绝对路径
     // path.resolve()方法返回一个绝对路径
     // __dirname 当前文件的文件夹绝对路径
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "../dist"),
     // 入口文件打包输出文件名
     filename: "static/js/main.js",
     // 自动清空上次的 dist 目录
@@ -61,14 +61,9 @@ module.exports = {
   // 插件
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, "public/index.html"),
+      template: path.resolve(__dirname, "../public/index.html"),
     }),
   ],
-  devServer: {
-    host: "localhost",
-    port: "3334",
-    open: true,
-  },
   // 模式
-  mode: "development", // 开发模式
+  mode: "production", // 开发模式
 };
