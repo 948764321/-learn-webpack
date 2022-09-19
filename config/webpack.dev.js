@@ -2,21 +2,18 @@
 const path = require("path");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   // 入口
-  // 相对路径和绝对路径都行
+  // 相对路径 取决于运行时所在文件，因此 ./ 即可
   entry: "./src/main.js",
   // 输出
   output: {
-    // path: 文件输出目录，必须是绝对路径
-    // path.resolve()方法返回一个绝对路径
-    // __dirname 当前文件的文件夹绝对路径
-    path: path.resolve(__dirname, "dist"),
+    // 开发模式无输出
+    path: undefined,
     // 入口文件打包输出文件名
     filename: "static/js/main.js",
-    // 自动清空上次的 dist 目录
-    clean: true,
   },
   // 加载器
   module: {
@@ -26,8 +23,16 @@ module.exports = {
         test: /\.css$/, // 只检测 .css 文件
         use: [
           // 执行顺序：从右到左（从上到下）
-          "style-loader", // 将 js 中的 css 通过创建 style 标签添加到 html 文件中生效
+          MiniCssExtractPlugin.loader,
           "css-loader",
+          {
+            loader: "postcss-loader",
+            option: {
+              postcssOption: {
+                plugins: ["postcss-preset-env"],
+              },
+            },
+          },
         ],
       },
       {
@@ -46,12 +51,22 @@ module.exports = {
           filename: "static/images/[hash:10][ext][query]",
         },
       },
+      {
+        test: /\.m?js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+        },
+      },
     ],
   },
   // 插件
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, "public/index.html"),
+      template: path.resolve(__dirname, "../public/index.html"),
+    }),
+    new MiniCssExtractPlugin({
+      filename: "static/css/main.css",
     }),
   ],
   devServer: {

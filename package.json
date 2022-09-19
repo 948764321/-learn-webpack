@@ -4,8 +4,9 @@
   "description": "当今各个成熟的框架都集成了打包工具，总是会莫名的无法运行，各种报错让人非常头疼，因此决定学习 webpack",
   "main": "./src/main.js",
   "scripts": {
-    "build:development": "webpack ./src/main.js --mode=development",
-    "build:production": "webpack ./src/main.js --mode=production",
+    "start": "npm run dev",
+    "dev": "webpack serve --config ./config/webpack.dev.js",
+    "build": "webpack --config ./config/webpack.prod.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,12 +21,23 @@
   },
   "homepage": "https://github.com/948764321/learn-webpack#readme",
   "devDependencies": {
+    "@babel/core": "^7.19.1",
+    "@babel/preset-env": "^7.19.1",
+    "babel-loader": "^8.2.5",
     "css-loader": "^6.7.1",
+    "css-minimizer-webpack-plugin": "^4.1.0",
     "html-minimizer-webpack-plugin": "^4.1.0",
     "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.6.1",
+    "postcss": "^8.4.16",
+    "postcss-loader": "^7.0.1",
+    "postcss-preset-env": "^7.8.2",
     "style-loader": "^3.3.1",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.11.0"
-  }
+  },
+  "browserslist": [
+    "ie >= 8"
+  ]
 }
